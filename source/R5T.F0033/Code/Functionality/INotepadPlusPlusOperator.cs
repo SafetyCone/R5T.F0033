@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
+using R5T.F0000;
 using R5T.T0132;
 
 
@@ -16,11 +19,35 @@ namespace R5T.F0033
 	{
 		public void Open(string filePath)
         {
-			var enquotedFilePath = F0000.Instances.StringOperator.EnsureEnquoted(filePath);
+			var enquotedFilePath = StringOperator.Instance.EnsureEnquoted(filePath);
 
-			F0000.Instances.CommandLineOperator.Run_Synchronous(
+			CommandLineOperator.Instance.Run_Synchronous(
 				Instances.ExecutableFilePaths.NotepadPlusPlus,
 				enquotedFilePath);
         }
+
+		public void Open(IEnumerable<string> filePaths)
+		{
+            foreach (var filePath in filePaths)
+            {
+				this.Open(filePath);
+            }
+		}
+
+		public void Open(params string[] filePaths)
+        {
+			this.Open(filePaths.AsEnumerable());
+        }
+
+		public void WriteTextAndOpen(
+			string textFilePath,
+			string text)
+		{
+			FileOperator.Instance.WriteText(
+				textFilePath,
+				text);
+
+			this.Open(textFilePath);
+		}
 	}
 }
