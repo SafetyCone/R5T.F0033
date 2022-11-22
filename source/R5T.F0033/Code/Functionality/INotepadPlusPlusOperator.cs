@@ -39,7 +39,18 @@ namespace R5T.F0033
 			this.Open(filePaths.AsEnumerable());
         }
 
-		public void WriteTextAndOpen(
+        public void WriteLinesAndOpen(
+            string textFilePath,
+            IEnumerable<string> lines)
+        {
+            FileOperator.Instance.WriteLines_Synchronous(
+                textFilePath,
+                lines);
+
+            this.Open(textFilePath);
+        }
+
+        public void WriteTextAndOpen(
 			string textFilePath,
 			string text)
 		{
