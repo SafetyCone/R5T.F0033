@@ -17,11 +17,17 @@ namespace R5T.F0033
 	[FunctionalityMarker]
 	public partial interface INotepadPlusPlusOperator : IFunctionalityMarker
 	{
+		public void Open()
+		{
+            CommandLineOperator.Instance.Run_Synchronous_NoWait(
+                Instances.ExecutableFilePaths.NotepadPlusPlus);
+        }
+
 		public void Open(string filePath)
         {
 			var enquotedFilePath = StringOperator.Instance.EnsureEnquoted(filePath);
 
-			CommandLineOperator.Instance.Run_Synchronous(
+			CommandLineOperator.Instance.Run_Synchronous_NoWait(
 				Instances.ExecutableFilePaths.NotepadPlusPlus,
 				enquotedFilePath);
         }
