@@ -82,7 +82,7 @@ namespace R5T.F0033
 			string textFilePath,
 			string text)
 		{
-			FileOperator.Instance.WriteText(
+			FileOperator.Instance.WriteText_Synchronous(
 				textFilePath,
 				text);
 
