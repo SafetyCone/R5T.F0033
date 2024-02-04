@@ -5,9 +5,9 @@ namespace R5T.F0033.Platform
 {
     public static class Instances
     {
-        public static L0053.ICommandLineOperator CommandLineOperator => L0053.CommandLineOperator.Instance;
+        public static L0066.ICommandLineOperator CommandLineOperator => L0066.CommandLineOperator.Instance;
         public static IExecutableFilePaths ExecutableFilePaths => Platform.ExecutableFilePaths.Instance;
-        public static L0053.IFileOperator FileOperator => L0053.FileOperator.Instance;
-        public static L0053.IStringOperator StringOperator => L0053.StringOperator.Instance;
+        public static L0066.IFileOperator FileOperator => L0066.FileOperator.Instance;
+        public static L0066.IStringOperator StringOperator => L0066.StringOperator.Instance;
     }
 }
