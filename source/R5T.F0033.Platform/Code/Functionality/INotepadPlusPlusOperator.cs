@@ -17,18 +17,37 @@ namespace R5T.F0033.Platform
     [FunctionalityMarker]
     public partial interface INotepadPlusPlusOperator : IFunctionalityMarker
     {
+        /// <summary>
+        /// Depending on whether 64-bit or 32-bit was installed, the executable is in one location or another.
+        /// </summary>
+        public string Get_NotepadPlusPlusExecutableFilePath()
+        {
+            var executableExists_64bit = Instances.FileSystemOperator.Exists_File(
+                Instances.ExecutableFilePaths.NotepadPlusPlus_Win64);
+
+            var output = executableExists_64bit
+                ? Instances.ExecutableFilePaths.NotepadPlusPlus_Win64
+                : Instances.ExecutableFilePaths.NotepadPlusPlus_Win32
+                ;
+
+            return output;
+        }
+
         public void Open()
         {
-            Instances.CommandLineOperator.Run_Synchronous_NoWait(
-                Instances.ExecutableFilePaths.NotepadPlusPlus);
+            var notepadPlusPlusExecutableFilePath = this.Get_NotepadPlusPlusExecutableFilePath();
+
+            Instances.CommandLineOperator.Run_Synchronous_NoWait(notepadPlusPlusExecutableFilePath);
         }
 
         public void Open(string filePath)
         {
             var enquotedFilePath = Instances.StringOperator.Ensure_Enquoted(filePath);
 
+            var notepadPlusPlusExecutableFilePath = this.Get_NotepadPlusPlusExecutableFilePath();
+
             Instances.CommandLineOperator.Run_Synchronous_NoWait(
-                Instances.ExecutableFilePaths.NotepadPlusPlus,
+                notepadPlusPlusExecutableFilePath,
                 enquotedFilePath);
         }
 

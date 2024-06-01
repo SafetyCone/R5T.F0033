@@ -10,9 +10,7 @@ namespace R5T.F0033
 	[ValuesMarker]
 	public partial interface IExecutableFilePaths : IValuesMarker
 	{
-		private static Platform.IExecutableFilePaths Platform => F0033.Platform.ExecutableFilePaths.Instance;
-
-
-		public IExecutableFilePath NotepadPlusPlus => Platform.NotepadPlusPlus.ToExecutableFilePath();
-	}
+        public IExecutableFilePath NotepadPlusPlus => Instances.NotepadPlusPlusOperator.Get_NotepadPlusPlusExecutableFilePath()
+			.ToExecutableFilePath();
+    }
 }
